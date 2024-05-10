@@ -1,0 +1,7 @@
+log/
+log/*
+data/
+data/*
+.env
+.htpasswd
+acme.json
