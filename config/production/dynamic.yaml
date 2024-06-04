@@ -37,8 +37,10 @@ http:
 tcp:
   routers:
     host-ssh:
-      rule:
-        - "HostSNI(console.develop.cett.dev.br)"
+      entryPoints:
+        - "ssh"
+      rule: "HostSNI(console.develop.cett.dev.br)"
+      service: "host-ssh"
   services:
     host-ssh:
       loadBalancer:
