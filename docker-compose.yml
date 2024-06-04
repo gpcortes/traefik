@@ -45,13 +45,11 @@ services:
     labels:
       - "traefik.enable=true"
 
-      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.rule=HostSNI(`${SERVICE_FORWARDING_FQDN}`)"
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.entryPoints=ssh"
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
-      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.tls.passthrough=true"
-      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.tls.certresolver=letsencrypt"
+      # - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.tls.passthrough=true"
       - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=22"
-      - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.tls=false"
 secrets:
 
   admin:
