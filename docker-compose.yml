@@ -9,11 +9,13 @@ services:
       - TZ=America/Sao_Paulo
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
-      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-router.middlewares=basicAuthFile@file"
-      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-router.entryPoints=web,websecure"
-      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-router.service=${SERVICE_TRAEFIK_NAME}-service"
-      - "traefik.http.services.${SERVICE_TRAEFIK_NAME}-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
+      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.middlewares=basicAuthFile@file"
+      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.entryPoints=web,websecure"
+      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.service=${SERVICE_TRAEFIK_NAME}-http-service"
+      - "traefik.http.services.${SERVICE_TRAEFIK_NAME}-http-service.loadbalancer.server.port=8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "80:80"
       - "443:443"
@@ -43,18 +45,13 @@ services:
     labels:
       - "traefik.enable=true"
 
-      - "traefik.http.routers.${SERVICE_FORWARDING_NAME}-http-router.rule=Host(`${SERVICE_FORWARDING_FQDN}`)"
-      - "traefik.http.routers.${SERVICE_FORWARDING_NAME}-http-router.entryPoints=web,websecure"
-      - "traefik.http.routers.${SERVICE_FORWARDING_NAME}-http-router.service=${SERVICE_FORWARDING_NAME}-http-service"
-      - "traefik.http.services.${SERVICE_FORWARDING_NAME}-http-service.loadbalancer.server.port=80"
-
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.rule=HostSNI(`${SERVICE_FORWARDING_FQDN}`)"
-      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.entryPoints=ssh"
+      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.tls.passthrough=true"
-      - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=22"
-
+      - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=2222"
 secrets:
+
   admin:
     file: ./config/${ENVIRONMENT}/.htpasswd
 networks:
