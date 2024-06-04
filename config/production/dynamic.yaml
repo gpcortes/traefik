@@ -39,7 +39,7 @@ tcp:
     host-ssh:
       entryPoints:
         - "ssh"
-      rule: "HostSNI(console.develop.cett.dev.br)"
+      rule: "HostSNI(`console.develop.cett.dev.br`)"
       service: "host-ssh"
   services:
     host-ssh:
