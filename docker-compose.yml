@@ -13,8 +13,8 @@ services:
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}.middlewares=basicAuthFile@file"
       - "traefik.http.services.${SERVICE_TRAEFIK_NAME}.loadbalancer.server.port=8080"
 
-      - "traefik.tcp.routers.${SERVICE_TRAEFIK_NAME}.rule=HostSNI(`${SERVICE_TRAEFIK_FQDN}`)"
-      - "traefik.tcp.services.${SERVICE_TRAEFIK_NAME}.loadBalancer.servers.address=host.docker.internal:22"
+      - "traefik.tcp.routers.ssh-${SERVICE_TRAEFIK_NAME}.rule=HostSNI(`${SERVICE_TRAEFIK_FQDN}`)"
+      - "traefik.tcp.services.ssh-${SERVICE_TRAEFIK_NAME}.loadBalancer.servers.address=host.docker.internal:22"
     ports:
       - "80:80"
       - "443:443"
