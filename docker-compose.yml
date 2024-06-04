@@ -22,6 +22,8 @@ services:
       - ./config/${ENVIRONMENT}/dynamic.yaml:/etc/traefik/dynamic.yaml:ro
       - ./config/${ENVIRONMENT}/acme.json:/etc/traefik/acme.json
       - ./log/traefik:/var/log/traefik
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     secrets:
       - source: admin
         target: /etc/traefik/.htpasswd
