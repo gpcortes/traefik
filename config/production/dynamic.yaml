@@ -36,14 +36,14 @@ http:
 
 tcp:
   routers:
-    host-ssh:
+    host-ssh-router:
       entryPoints:
         - "ssh"
       rule: "HostSNI(`console.develop.cett.dev.br`)"
-      service: "host-ssh"
+      service: "host-ssh-service"
       tls: {}
   services:
-    host-ssh:
+    host-ssh-service:
       loadBalancer:
         servers:
           - address: "host.docker.internal:22"
