@@ -41,6 +41,7 @@ tcp:
         - "ssh"
       rule: "HostSNI(`console.develop.cett.dev.br`)"
       service: "host-ssh"
+      tls: {}
   services:
     host-ssh:
       loadBalancer:
