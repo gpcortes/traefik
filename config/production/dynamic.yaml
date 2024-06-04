@@ -33,3 +33,14 @@ http:
           Scope: openid
           TokenCookieName: AUTH_TOKEN
           UseAuthHeader: "false"
+
+tcp:
+  routers:
+    host-ssh:
+      rule:
+        - "HostSNI(console.develop.cett.dev.br)"
+  services:
+    host-ssh:
+      loadBalancer:
+        servers:
+          - address: "host.docker.internal:22"
