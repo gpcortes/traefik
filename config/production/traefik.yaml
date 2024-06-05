@@ -31,7 +31,7 @@ entryPoints:
       tls:
         certResolver: letsencrypt
   ssh:
-    address: ':2222'
+    address: ':22'
 certificatesResolvers:
   letsencrypt:
     acme:
