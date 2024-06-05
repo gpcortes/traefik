@@ -14,11 +14,6 @@ services:
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.entryPoints=web,websecure"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.service=${SERVICE_TRAEFIK_NAME}-http-service"
       - "traefik.http.services.${SERVICE_TRAEFIK_NAME}-http-service.loadbalancer.server.port=8080"
-
-      - "traefik.tcp.routers.${SERVICE_TRAEFIK_NAME}-tcp-router.rule=HostSNI(`*`)"
-      - "traefik.tcp.routers.${SERVICE_TRAEFIK_NAME}-tcp-router.entryPoints=ssh"
-      - "traefik.tcp.routers.${SERVICE_TRAEFIK_NAME}-tcp-router.service=${SERVICE_TRAEFIK_NAME}-tcp-service"
-      - "traefik.tcp.services.${SERVICE_TRAEFIK_NAME}-tcp-service.loadbalancer.server.address=172.17.0.1:22"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
@@ -35,25 +30,25 @@ services:
       - source: admin
         target: /etc/traefik/.htpasswd
 
-  # ssh-forwarding:
-  #   build:
-  #     context: forwarding
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - TZ=America/Sao_Paulo
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
-  #   privileged: true
-  #   labels:
-  #     - "traefik.enable=true"
+  ssh-forwarding:
+    build:
+      context: forwarding
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - TZ=America/Sao_Paulo
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    privileged: true
+    labels:
+      - "traefik.enable=true"
 
-  #     - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.rule=HostSNI(`*`)"
-  #     - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.entryPoints=ssh"
-  #     - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
-  #     - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=22"
+      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.entryPoints=ssh"
+      - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
+      - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=22"
 
 secrets:
   admin:
