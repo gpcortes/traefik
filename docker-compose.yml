@@ -48,7 +48,7 @@ services:
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.rule=HostSNI(`*`)"
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.entryPoints=ssh"
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
-      - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=2222"
+      - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=22"
 
 secrets:
   admin:
