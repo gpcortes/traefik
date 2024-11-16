@@ -10,7 +10,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
-      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.middlewares=basicAuthFile@file"
+      - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.middlewares=basicAuthFile@file,cloudflarewarp"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.entryPoints=web,websecure"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.service=${SERVICE_TRAEFIK_NAME}-http-service"
       - "traefik.http.services.${SERVICE_TRAEFIK_NAME}-http-service.loadbalancer.server.port=8080"
