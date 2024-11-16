@@ -32,6 +32,8 @@ entryPoints:
         certResolver: letsencrypt
   ssh:
     address: ':22'
+serversTransport:
+  insecureSkipVerify: true
 certificatesResolvers:
   letsencrypt:
     acme:
@@ -40,7 +42,6 @@ certificatesResolvers:
       dnsChallenge:
         provider: cloudflare
         delayBeforeCheck: 10
-      tlsChallenge: {}
 global:
   checkNewVersion: true
   sendAnonymousUsage: true
