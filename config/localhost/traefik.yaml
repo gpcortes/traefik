@@ -1,5 +1,8 @@
 log:
-  level: INFO  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
+  level: ERROR  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
+  filePath: "/var/log/traefik/traefik.log"
+  format: json
+  maxSize: 1
 providers:
   docker:
     exposedByDefault: false
