@@ -55,4 +55,4 @@ experimental:
       version: v0.1.2
     cloudflarewarp:
       moduleName: github.com/BetterCorp/cloudflarewarp
-      version: v1.4.0
+      version: v1.3.3
