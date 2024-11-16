@@ -7,6 +7,8 @@ services:
       - .env
     environment:
       - TZ=America/Sao_Paulo
+      - CF_API_EMAIL=${CF_API_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
