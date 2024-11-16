@@ -29,6 +29,12 @@ services:
       - ./config/${ENVIRONMENT}/dynamic.yaml:/etc/traefik/dynamic.yaml:ro
       - ./config/${ENVIRONMENT}/acme.json:/etc/traefik/acme.json
       - ./log/traefik:/var/log/traefik
+    healthcheck:
+      test: ["CMD", "wget", "http://localhost:8082/ping","--spider"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
     secrets:
       - source: admin
         target: /etc/traefik/.htpasswd
