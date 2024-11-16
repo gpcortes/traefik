@@ -48,11 +48,11 @@ global:
 experimental:
   plugins:
     keycloakopenid:
-      moduleName: "github.com/Gwojda/keycloakopenid"
-      version: "v0.1.35"
+      moduleName: github.com/Gwojda/keycloakopenid
+      version: v0.1.35
     header-rewrite-traefik-plugin:
-      moduleName: "github.com/che-incubator/header-rewrite-traefik-plugin"
-      version: "v0.1.2"
+      moduleName: github.com/che-incubator/header-rewrite-traefik-plugin
+      version: v0.1.2
     cloudflarewarp:
-      moduleName: "github.com/BetterCorp/cloudflarewarp"
-      version: "v1.3.3"
+      moduleName: github.com/BetterCorp/cloudflarewarp
+      version: v1.4.0
