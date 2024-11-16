@@ -4,7 +4,7 @@
 DOCKER_INTERNAL_IP=$(getent hosts host.docker.internal | awk '{ print $1 }')
 
 # Define porta de acesso ssh de entrada do container
-INCOMING_SSH_PORT=${SSH_PORT:-2222}
+INCOMING_SSH_PORT=${SSH_PORT:-22}
 
 # Define porta de acesso ssh do host docker
 OUTGOING_SSH_PORT=${SSH_HOST_PORT:-2222}
