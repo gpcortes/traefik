@@ -12,9 +12,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/log/auth.log:/var/log/auth.log:ro
-      - /var/log/crowdsec:/var/log/crowdsec:ro
-      - /opt/crowdsec-db:/var/lib/crowdsec/data
-      - /opt/crowdsec:/etc/crowdsec
+      - ./log/crowdsec:/var/log/crowdsec:ro
+      - ./data/crowdsec-db:/var/lib/crowdsec/data
+      - ./config/crowdsec:/etc/crowdsec
       - ./log/traefik:/var/log/traefik:ro
     labels:
       - traefik.enable=false
@@ -31,8 +31,8 @@ services:
   traefik:
     image: traefik:${TRAEFIK_VARIANT}
     restart: always
-    depends_on:
-      - crowdsec
+    # depends_on:
+    #   - crowdsec
     env_file:
       - .env
     environment:
