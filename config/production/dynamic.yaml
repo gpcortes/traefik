@@ -30,10 +30,10 @@ http:
           - default-security-headers
           - gzip
 
-    coraza-waf:
-      forwardauth:
-        address: http://coraza:8080
-        trustForwardHeader: true
+    # coraza-waf:
+    #   forwardauth:
+    #     address: http://coraza:8080
+    #     trustForwardHeader: true
 
     crowdsec-bouncer:
       forwardauth:
