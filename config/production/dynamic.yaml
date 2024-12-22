@@ -18,6 +18,42 @@ tls:
 
 http:
   middlewares:
+    default:
+      chain:
+        middlewares:
+          - default-security-headers
+          - gzip
+    
+    secHeaders:
+      chain:
+        middlewares:
+          - default-security-headers
+          - gzip
+
+    coraza-waf:
+      forwardauth:
+        address: http://coraza:8080
+        trustForwardHeader: true
+
+    crowdsec-bouncer:
+      forwardauth:
+        address: http://crowdsec-bouncer-traefik:8080/api/v1/forwardAuth
+        trustForwardHeader: true
+        
+    default-security-headers:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        frameDeny: true
+        sslRedirect: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+        customFrameOptionsValue: "SAMEORIGIN"
+
+    gzip:
+      compress: {}
 
     basicAuthFile:
       basicAuth:

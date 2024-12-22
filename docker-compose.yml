@@ -1,8 +1,38 @@
 services:
 
+  crowdsec:
+    image: crowdsecurity/crowdsec
+    environment:
+      PGID: "1000"
+      COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/sshd"
+    restart: always
+    security_opt:
+      - no-new-privileges=true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log/auth.log:/var/log/auth.log:ro
+      - /var/log/crowdsec:/var/log/crowdsec:ro
+      - /opt/crowdsec-db:/var/lib/crowdsec/data
+      - /opt/crowdsec:/etc/crowdsec
+      - ./log/traefik:/var/log/traefik:ro
+    labels:
+      - traefik.enable=false
+
+  crowdsec-bouncer-traefik:
+    image: fbonalair/traefik-crowdsec-bouncer:latest
+    environment:
+      CROWDSEC_BOUNCER_API_KEY: ${CROWDSEC_BOUNCER_API_KEY}
+      CROWDSEC_AGENT_HOST: crowdsec:8080  
+    restart: unless-stopped
+    depends_on:
+      - crowdsec
+
   traefik:
     image: traefik:${TRAEFIK_VARIANT}
     restart: always
+    depends_on:
+      - crowdsec
     env_file:
       - .env
     environment:
@@ -24,6 +54,7 @@ services:
       - "443:443"
       - "${SSH_PORT}:22"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/${ENVIRONMENT}/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./config/${ENVIRONMENT}/dynamic.yaml:/etc/traefik/dynamic.yaml:ro
@@ -59,6 +90,14 @@ services:
       - "traefik.tcp.routers.${SERVICE_FORWARDING_NAME}-tcp-router.service=${SERVICE_FORWARDING_NAME}-tcp-service"
       - "traefik.tcp.services.${SERVICE_FORWARDING_NAME}-tcp-service.loadbalancer.server.port=22"
 
+  coraza:
+    image: ghcr.io/corazawaf/coraza
+    ports:
+      - "8080"
+    volumes:
+      - ./coraza/coraza.yaml:/etc/coraza/coraza.yaml:ro
+      - ./coraza/rules:/etc/coraza/rules:ro
+      
 secrets:
   admin:
     file: ./config/${ENVIRONMENT}/.htpasswd
