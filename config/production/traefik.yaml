@@ -47,8 +47,8 @@ entryPoints:
     http:
       tls:
         certResolver: letsencrypt
-      middlewares:
-        - crowdsec-bouncer@file
+      # middlewares:
+      #   - crowdsec-bouncer@file
   ssh:
     address: ':22'
 serversTransport:
