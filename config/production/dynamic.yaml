@@ -18,17 +18,17 @@ tls:
 
 http:
   middlewares:
-    default:
-      chain:
-        middlewares:
-          - default-security-headers
-          - gzip
+    # default:
+    #   chain:
+    #     middlewares:
+    #       - default-security-headers
+    #       - gzip
     
-    secHeaders:
-      chain:
-        middlewares:
-          - default-security-headers
-          - gzip
+    # secHeaders:
+    #   chain:
+    #     middlewares:
+    #       - default-security-headers
+    #       - gzip
 
     # coraza-waf:
     #   forwardauth:
@@ -40,20 +40,20 @@ http:
         address: http://crowdsec-bouncer-traefik:8080/api/v1/forwardAuth
         trustForwardHeader: true
         
-    default-security-headers:
-      headers:
-        browserXssFilter: true
-        contentTypeNosniff: true
-        frameDeny: true
-        sslRedirect: true
-        forceSTSHeader: true
-        stsIncludeSubdomains: true
-        stsPreload: true
-        stsSeconds: 31536000
-        customFrameOptionsValue: "SAMEORIGIN"
+    # default-security-headers:
+    #   headers:
+    #     browserXssFilter: true
+    #     contentTypeNosniff: true
+    #     frameDeny: true
+    #     sslRedirect: true
+    #     forceSTSHeader: true
+    #     stsIncludeSubdomains: true
+    #     stsPreload: true
+    #     stsSeconds: 31536000
+    #     customFrameOptionsValue: "SAMEORIGIN"
 
-    gzip:
-      compress: {}
+    # gzip:
+    #   compress: {}
 
     basicAuthFile:
       basicAuth:
