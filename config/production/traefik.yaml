@@ -15,7 +15,7 @@ providers:
     watch: true
 api:
   dashboard: true
-  insecure: true
+  insecure: false
 serversTransport:
   insecureSkipVerify: true
 entryPoints:
