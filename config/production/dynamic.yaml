@@ -66,6 +66,8 @@ http:
         stsPreload: true
         stsSeconds: 31536000
         customFrameOptionsValue: "SAMEORIGIN"
+        customRequestHeaders:
+          X-Forwarded-Proto: https
 
     gzip:
       compress: {}
@@ -84,3 +86,8 @@ http:
           Scope: openid
           TokenCookieName: AUTH_TOKEN
           UseAuthHeader: "false"
+
+    crowdsec-bouncer:
+      forwardauth:
+        address: http://crowdsec-bouncer-traefik:8080/api/v1/forwardAuth
+        trustForwardHeader: true
