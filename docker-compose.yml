@@ -41,6 +41,7 @@ services:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=${SERVICE_TRAEFIK_NETWORK}"
 
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.middlewares=basicAuthFile@file"
