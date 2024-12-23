@@ -115,7 +115,6 @@ http:
           crowdsecAppsecHost: crowdsec:7422
           crowdsecAppsecFailureBlock: true
           crowdsecAppsecUnreachableBlock: true
-          crowdsecLapiKey: ${CROWDSEC_BOUNCER_API_KEY}                                    # Replace CrowdSec API key (docker exec crowdsec cscli bouncers add crowdsecBouncer)
 #          crowdsecLapiKeyFile: /etc/traefik/cs-privateKey-foo
           crowdsecLapiHost: crowdsec:8080
           crowdsecLapiScheme: http

@@ -39,6 +39,7 @@ services:
       - TZ=America/Sao_Paulo
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.crowdsec.plugin.bouncer.crowdseclapikey=${CROWDSEC_BOUNCER_API_KEY}"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.middlewares=basicAuthFile@file,cloudflarewarp@file,crowdsec@file"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.entryPoints=web,websecure"
