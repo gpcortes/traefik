@@ -35,6 +35,8 @@ services:
     restart: always
     env_file:
       - .env
+    command:
+      - "--certificatesresolvers.${CERT_RESOLVER}.acme.email=${LETS_EMAIL}"
     environment:
       - TZ=America/Sao_Paulo
       - CROWDSEC_BOUNCER_API_KEY=${CROWDSEC_BOUNCER_API_KEY}
