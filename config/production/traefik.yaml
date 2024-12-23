@@ -47,22 +47,25 @@ entryPoints:
         - "131.0.72.0/22"
     http:
       tls:
-        certResolver: cloudflare
+        certResolver: letsencrypt
       middlewares:
         - "crowdsec@file"
         - "cloudflarewarp@file"
   ssh:
     address: ':22'
 certificatesResolvers:
-  # letsencrypt:
-  #   acme:
-  #     caServer: https://acme-v02.api.letsencrypt.org/directory
-  #     storage: /etc/traefik/acme.json
-  #     tlsChallenge: {}
+  letsencrypt:
+    acme:
+      caServer: https://acme-v02.api.letsencrypt.org/directory
+      storage: /etc/traefik/acme.json
+      tlsChallenge: {}
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 10
   cloudflare:
     acme:
-      email: gpcortes@gmail.com
-      storage: acme.json
+      email: mail@gmail.com
+      storage: /etc/traefik/acme.json
       dnsChallenge:
         provider: cloudflare
         #disablePropagationCheck: true 
