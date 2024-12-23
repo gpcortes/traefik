@@ -1,4 +1,3 @@
----
 log:
   level: INFO  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
   filePath: "/var/log/traefik/traefik.log"
