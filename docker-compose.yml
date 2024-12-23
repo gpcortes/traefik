@@ -40,6 +40,7 @@ services:
       - CROWDSEC_BOUNCER_API_KEY=${CROWDSEC_BOUNCER_API_KEY}
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.crowdsec.plugin.bouncer.crowdsecLapiKey=${CROWDSEC_BOUNCER_API_KEY}"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.rule=Host(`${SERVICE_TRAEFIK_FQDN}`)"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.middlewares=basicAuthFile@file"
       - "traefik.http.routers.${SERVICE_TRAEFIK_NAME}-http-router.entryPoints=web,websecure"
