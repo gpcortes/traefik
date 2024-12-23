@@ -100,3 +100,31 @@ http:
             - 10.0.0.0/8
             - 172.0.0.0/8
             - 192.0.0.0/8
+    
+    crowdsec:
+      plugin:
+        bouncer:
+          enabled: true
+          logLevel: INFO
+          updateIntervalSeconds: 15
+          updateMaxFailure: 0
+          defaultDecisionSeconds: 15
+          httpTimeoutSeconds: 10
+          crowdsecMode: stream
+          crowdsecAppsecEnabled: true
+          crowdsecAppsecHost: crowdsec:7422
+          crowdsecAppsecFailureBlock: true
+          crowdsecAppsecUnreachableBlock: true
+          crowdsecLapiKey: %env:CROWDSEC_BOUNCER_API_KEY%                                    # Replace CrowdSec API key (docker exec crowdsec cscli bouncers add crowdsecBouncer)
+#          crowdsecLapiKeyFile: /etc/traefik/cs-privateKey-foo
+          crowdsecLapiHost: crowdsec:8080
+          crowdsecLapiScheme: http
+          forwardedHeadersTrustedIPs:
+            - 10.0.35.4/32                                                              # Cloudflare tunnel IP address
+#            - 172.30.0.0/24                                                            # Reverse Proxy IP address 
+          clientTrustedIPs:
+            - 10.20.10.0/24                                                              # Internal LAN IP addresses 
+            - 10.20.15.0/24                                                              # Internal LAN IP addresses
+            - 10.20.20.0/24                                                              # Internal LAN IP addresses
+            - 10.20.25.0/24                                                              # Internal LAN IP addresses
+#          forwardedHeadersCustomName: CF-Connecting-IP                                 # Cloudflare IP address header
