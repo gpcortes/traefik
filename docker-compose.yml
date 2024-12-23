@@ -1,32 +1,32 @@
 services:
 
-  crowdsec:
-    image: crowdsecurity/crowdsec
-    environment:
-      PGID: "1000"
-      COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/sshd"
-    restart: always
-    security_opt:
-      - no-new-privileges=true
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/log/auth.log:/var/log/auth.log:ro
-      - ./log/crowdsec:/var/log/crowdsec:ro
-      - ./data/crowdsec-db:/var/lib/crowdsec/data
-      - ./config/crowdsec:/etc/crowdsec
-      - ./log/traefik:/var/log/traefik:ro
-    labels:
-      - traefik.enable=false
+  # crowdsec:
+  #   image: crowdsecurity/crowdsec
+  #   environment:
+  #     PGID: "1000"
+  #     COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/sshd"
+  #   restart: always
+  #   security_opt:
+  #     - no-new-privileges=true
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /var/log/auth.log:/var/log/auth.log:ro
+  #     - ./log/crowdsec:/var/log/crowdsec:ro
+  #     - ./data/crowdsec-db:/var/lib/crowdsec/data
+  #     - ./config/crowdsec:/etc/crowdsec
+  #     - ./log/traefik:/var/log/traefik:ro
+  #   labels:
+  #     - traefik.enable=false
 
-  crowdsec-bouncer-traefik:
-    image: fbonalair/traefik-crowdsec-bouncer:latest
-    environment:
-      CROWDSEC_BOUNCER_API_KEY: ${CROWDSEC_BOUNCER_API_KEY}
-      CROWDSEC_AGENT_HOST: crowdsec:8080  
-    restart: unless-stopped
-    depends_on:
-      - crowdsec
+  # crowdsec-bouncer-traefik:
+  #   image: fbonalair/traefik-crowdsec-bouncer:latest
+  #   environment:
+  #     CROWDSEC_BOUNCER_API_KEY: ${CROWDSEC_BOUNCER_API_KEY}
+  #     CROWDSEC_AGENT_HOST: crowdsec:8080  
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - crowdsec
 
   traefik:
     image: traefik:${TRAEFIK_VARIANT}
