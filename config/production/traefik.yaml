@@ -58,7 +58,7 @@ certificatesResolvers:
     acme:
       caServer: https://acme-v02.api.letsencrypt.org/directory
       storage: /etc/traefik/acme.json
-      tlsChallenge: {}
+      # tlsChallenge: {}
       dnsChallenge:
         provider: cloudflare
         delayBeforeCheck: 10
