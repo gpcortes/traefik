@@ -1,4 +1,3 @@
----
 log:
   level: INFO  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
   filePath: "/var/log/traefik/traefik.log"
@@ -16,7 +15,8 @@ providers:
     watch: true
 api:
   dashboard: true
-  insecure: true
+serversTransport:
+  insecureSkipVerify: true
 entryPoints:
   web:
     address: ':80'
