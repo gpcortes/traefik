@@ -34,11 +34,11 @@ http:
           TokenCookieName: AUTH_TOKEN
           UseAuthHeader: "false"
 
-    cloudflarewarp:
-      plugin:
-        cloudflarewarp:
-          disableDefault: false
-          trustip:
-            - 10.0.0.0/8
-            - 172.0.0.0/8
-            - 192.0.0.0/8
+    # cloudflarewarp:
+    #   plugin:
+    #     cloudflarewarp:
+    #       disableDefault: false
+    #       trustip:
+    #         - 10.0.0.0/8
+    #         - 172.0.0.0/8
+    #         - 192.0.0.0/8
