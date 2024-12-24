@@ -4,6 +4,7 @@ FROM alpine:latest
 # Instale iptables
 RUN apk add --update --no-cache iptables
 RUN apk add --update --no-cache openssh
+RUN apk add --update --no-cache cs-firewall-bouncer
 
 # Script para configurar as regras do iptables
 COPY iptables-setup.sh /usr/local/bin/iptables-setup.sh
