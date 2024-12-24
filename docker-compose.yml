@@ -4,7 +4,7 @@ services:
     image: crowdsecurity/crowdsec
     environment:
       PGID: "1000"
-      COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/sshd crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-generic-rules inherent-io/keycloak MariuszKociubinski/bitwarden"
+      COLLECTIONS: "crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/whitelist-good-actors crowdsecurity/sshd crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-generic-rules inherent-io/keycloak MariuszKociubinski/bitwarden crowdsecurity/iptables crowdsecurity/linux"
     restart: always
     security_opt:
       - no-new-privileges=true
