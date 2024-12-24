@@ -2,9 +2,13 @@ filenames:
   - /var/log/traefik/*
 labels:
   type: traefik
-
 ---
-
+filenames:
+  - /var/log/auth.log
+  - /var/log/syslog
+labels:
+  type: syslog
+---
 listen_addr: 0.0.0.0:7422
 appsec_config: crowdsecurity/virtual-patching
 name: myAppSecComponent

@@ -11,6 +11,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/log/syslog:/var/log/syslog:ro
       - /var/log/auth.log:/var/log/auth.log:ro
       - ./log/crowdsec:/var/log/crowdsec:ro
       - ./data/crowdsec-db:/var/lib/crowdsec/data

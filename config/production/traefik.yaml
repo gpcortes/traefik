@@ -22,6 +22,9 @@ entryPoints:
   web:
     address: ':80'
     http:
+      middlewares:
+        - "crowdsec@file"
+        - "cloudflarewarp@file"
       redirections:
         entryPoint:
           to: websecure
