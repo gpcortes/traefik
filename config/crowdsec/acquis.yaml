@@ -15,3 +15,16 @@ name: myAppSecComponent
 source: appsec
 labels:
   type: appsec
+---
+source: docker
+container_name:
+ - auth-keycloak-1
+#container_id:
+# - 843ee92d231b
+labels:
+  type: keycloak
+---
+filenames:
+  - /var/log/bitwarden/identity.log
+labels:
+  type: bitwarden
