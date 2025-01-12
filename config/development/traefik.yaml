@@ -32,6 +32,8 @@ entryPoints:
         certResolver: letsencrypt
   ssh:
     address: ':22'
+  stun:
+    address: ':3478'
 certificatesResolvers:
   letsencrypt:
     acme:

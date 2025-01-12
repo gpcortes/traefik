@@ -1,5 +1,5 @@
 log:
-  level: ERROR  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
+  level: INFO  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
   filePath: "/var/log/traefik/traefik.log"
   format: json
   maxSize: 1
@@ -13,6 +13,8 @@ providers:
 api:
   dashboard: true
   insecure: true
+serversTransport:
+  insecureSkipVerify: true
 entryPoints:
   web:
     address: ':80'
@@ -20,6 +22,8 @@ entryPoints:
     address: ':443'
   ssh:
     address: ':2222'
+  stun:
+    address: ':3478'
 global:
   checkNewVersion: true
   sendAnonymousUsage: true
