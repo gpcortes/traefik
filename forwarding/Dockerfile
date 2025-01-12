@@ -1,14 +1,30 @@
-# Use a imagem base do Alpine Linux
-FROM alpine:latest
+ARG GOVERSION=1.15
 
-# Instale iptables
+FROM golang:${GOVERSION}-alpine AS build
+
+RUN apk update && apk add make git
 RUN apk add --update --no-cache iptables
 RUN apk add --update --no-cache openssh
-RUN apk add --update --no-cache cs-firewall-bouncer
+
+WORKDIR /go/src/crowdsec
+COPY . .
+
+RUN make release && \ 
+    tar xzvf cs-cloud-firewall-bouncer.tgz && \
+    cd cs-cloud-firewall-bouncer-v*/ && \
+    install -v -m 755 -D ./cs-cloud-firewall-bouncer "/usr/local/bin/cs-cloud-firewall-bouncer"
+
+FROM alpine:latest
+COPY --from=build /usr/local/bin/cs-cloud-firewall-bouncer /usr/local/bin/cs-cloud-firewall-bouncer
 
 # Script para configurar as regras do iptables
 COPY iptables-setup.sh /usr/local/bin/iptables-setup.sh
 RUN chmod +x /usr/local/bin/iptables-setup.sh
 
-# Execute o script no início do container
-ENTRYPOINT ["/usr/local/bin/iptables-setup.sh"]
+COPY docker/entrypoint.sh /etc/crowdsec/start.sh
+
+ENV CONFIG_PATH="/etc/crowdsec/config.d/config.yaml"
+
+VOLUME /etc/crowdsec/config.d/
+
+ENTRYPOINT /etc/crowdsec/start.sh
