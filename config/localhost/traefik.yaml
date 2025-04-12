@@ -23,7 +23,11 @@ entryPoints:
   ssh:
     address: ':2222'
   stun:
-    address: ':3478'
+    address: ':3478/udp'
+  ufdevices:
+    address: ':8000'
+  ufmst:
+    address: ':6789'
 global:
   checkNewVersion: true
   sendAnonymousUsage: true
