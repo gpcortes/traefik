@@ -53,12 +53,12 @@ entryPoints:
         - "cloudflarewarp@file"
   ssh:
     address: ':22'
-  stun:
-    address: ':3478/udp'
-  ufdevices:
-    address: ':8000'
-  ufmst:
-    address: ':6789'
+  # stun:
+  #   address: ':3478/udp'
+  # ufdevices:
+  #   address: ':8000'
+  # ufmst:
+  #   address: ':6789'
 certificatesResolvers:
   letsencrypt:
     acme:
