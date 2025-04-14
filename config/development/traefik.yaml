@@ -32,12 +32,12 @@ entryPoints:
         certResolver: letsencrypt
   ssh:
     address: ':22'
-  # stun:
-  #   address: ':3478/tcp'
+  stun:
+    address: ':3478/tcp'
   # ufdevices:
   #   address: ':8000'
-  # ufmst:
-  #   address: ':6789'
+  ufmst:
+    address: ':6789'
 certificatesResolvers:
   letsencrypt:
     acme:
