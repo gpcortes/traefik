@@ -16,8 +16,6 @@ api:
 serversTransport:
   insecureSkipVerify: true
 entryPoints:
-  traefik:
-    address: ':8280'
   web:
     address: ':80'
   websecure:
