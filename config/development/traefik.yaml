@@ -27,11 +27,11 @@ entryPoints:
           scheme: https
   web:
     address: ':80'
-    http:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https      
+    # http:
+    #   redirections:
+    #     entryPoint:
+    #       to: websecure
+    #       scheme: https      
   websecure:
     address: ':443'
     http:
@@ -42,7 +42,7 @@ entryPoints:
   stun:
     address: ':3478/tcp'
   ufdevices:
-    address: ':8000'
+    address: ':8280'
   ufmst:
     address: ':6789'
 certificatesResolvers:
