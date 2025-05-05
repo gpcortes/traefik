@@ -56,7 +56,7 @@ entryPoints:
   stun:
     address: ':3478/udp'
   ufdevices:
-    address: ':8080'
+    address: ':8280'
   ufmst:
     address: ':6789'
 certificatesResolvers:
