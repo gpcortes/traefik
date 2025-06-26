@@ -16,7 +16,6 @@ providers:
 api:
   dashboard: true
   insecure: true
-  debug: true
 serversTransport:
   insecureSkipVerify: true
 entryPoints:
